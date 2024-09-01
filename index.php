@@ -1,5 +1,15 @@
 <?php require "includes/header.php" ?>
 
+<?php
+
+$companies_sql = "SELECT * FROM companies LIMIT 4";
+$companies_result = mysqli_query($conn, $companies_sql);
+
+$locations_sql = "SELECT * FROM locations";
+$locations_result = mysqli_query($conn, $locations_sql);
+
+?>
+
 <!-- 
 		=============================================
 			Hero Banner
@@ -28,23 +38,23 @@
                     <div class="input-box">
                       <div class="label">What are you looking for?</div>
                       <select class="nice-select lg">
-                        <option value="1">UI Designer</option>
-                        <option value="2">Content creator</option>
-                        <option value="3">Web Developer</option>
-                        <option value="4">SEO Guru</option>
-                        <option value="5">Digital marketer</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="input-box border-left">
-                      <div class="label">Category</div>
-                      <select class="nice-select lg">
                         <?php
                         $categories_result = mysqli_query($conn, $categories_sql);
                         while ($category = mysqli_fetch_assoc($categories_result)): ?>
                           <option value="<?php echo $category['category_id'] ?>"><?php echo $category['category_name'] ?></option>
                         <?php endwhile; ?>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="input-box border-left">
+                      <div class="label">Location</div>
+                      <select class="nice-select lg">
+                        <option value="1">UI Designer</option>
+                        <option value="2">Content creator</option>
+                        <option value="3">Web Developer</option>
+                        <option value="4">SEO Guru</option>
+                        <option value="5">Digital marketer</option>
                       </select>
                     </div>
                   </div>
@@ -141,7 +151,7 @@
               class="icon d-flex align-items-center justify-content-center">
               <img
                 src="assets/images/lazy.svg"
-                data-src="https://html.creativegigstf.com/jobi/jobi/<?php echo $category['category_icon'] ?>"
+                data-src="<?php echo $category['category_icon'] ?>"
                 alt=""
                 class="lazy-img" />
             </div>
@@ -347,89 +357,35 @@
       <div class="col-md-7">
         <div class="title-one text-center text-md-start mb-65 md-mb-50">
           <h2>
-            Find the best
-            <span class="position-relative">talented
+            Discover top
+            <span class="position-relative">opportunities
               <img
                 src="assets/images/lazy.svg"
                 data-src="https://html.creativegigstf.com/jobi/jobi/images/shape/shape_04.svg"
                 alt=""
                 class="lazy-img shapes shape" /></span>
-            expert in jobi.
+            in your area.
           </h2>
         </div>
       </div>
     </div>
 
     <div class="expert-slider-one">
-      <div class="item">
-        <div class="card-style-three text-center">
-          <div class="img-meta mb-40 lg-mb-20">
-            <img
-              src="assets/images/assets/img_05.jpg"
-              alt=""
-              class="m-auto" />
+      <?php while ($location = mysqli_fetch_assoc($locations_result)): ?>
+        <div class="item">
+          <div class="card-style-three text-center">
+            <div class="img-meta mb-40 lg-mb-20">
+              <img
+                src="<?php echo $location['location_image'] ?>"
+                alt=""
+                class="m-auto" />
+            </div>
+            <a href="#" class="name text-md fw-500 text-dark"><?php echo $location['location_name'] ?></a>
+            <div class="post">12k+ Jobs</div>
           </div>
-          <a href="#" class="name text-md fw-500 text-dark">Julie Ake</a>
-          <div class="post">Product Designer</div>
+          <!-- /.card-style-three -->
         </div>
-        <!-- /.card-style-three -->
-      </div>
-      <!-- /.item -->
-      <div class="item">
-        <div class="card-style-three text-center">
-          <div class="img-meta mb-40 lg-mb-20">
-            <img
-              src="assets/images/assets/img_06.jpg"
-              alt=""
-              class="m-auto" />
-          </div>
-          <a href="#" class="name text-md fw-500 text-dark">Juan Marko</a>
-          <div class="post">Java Developer</div>
-        </div>
-        <!-- /.card-style-three -->
-      </div>
-      <!-- /.item -->
-      <div class="item">
-        <div class="card-style-three text-center">
-          <div class="img-meta mb-40 lg-mb-20">
-            <img
-              src="assets/images/assets/img_07.jpg"
-              alt=""
-              class="m-auto" />
-          </div>
-          <a href="#" class="name text-md fw-500 text-dark">Elizabeth Foster</a>
-          <div class="post">UI/UX Designer</div>
-        </div>
-        <!-- /.card-style-three -->
-      </div>
-      <!-- /.item -->
-      <div class="item">
-        <div class="card-style-three text-center">
-          <div class="img-meta mb-40 lg-mb-20">
-            <img
-              src="assets/images/assets/img_08.jpg"
-              alt=""
-              class="m-auto" />
-          </div>
-          <a href="#" class="name text-md fw-500 text-dark">Rashed Ka</a>
-          <div class="post">Marketing Expert</div>
-        </div>
-        <!-- /.card-style-three -->
-      </div>
-      <!-- /.item -->
-      <div class="item">
-        <div class="card-style-three text-center">
-          <div class="img-meta mb-40 lg-mb-20">
-            <img
-              src="assets/images/assets/img_07.jpg"
-              alt=""
-              class="m-auto" />
-          </div>
-          <a href="#" class="name text-md fw-500 text-dark">Elizabeth Foster</a>
-          <div class="post">UI/UX Designer</div>
-        </div>
-        <!-- /.card-style-three -->
-      </div>
+      <?php endwhile; ?>
       <!-- /.item -->
     </div>
     <ul
@@ -577,6 +533,45 @@
   </div>
 </section>
 <!-- /.feedback-section-one -->
+
+<!-- 
+		=============================================
+			Top Company
+		============================================== 
+		-->
+
+<section class="top-company-section pt-100 lg-pt-60 pb-130 lg-pb-80 mt-200 xl-mt-150">
+  <div class="container">
+    <div class="row justify-content-between align-items-center pb-40 lg-pb-10">
+      <div class="col-sm-7">
+        <div class="title-one">
+          <h2 class="main-font">Top Companies</h2>
+        </div>
+      </div>
+      <div class="col-sm-5">
+        <div class="d-flex justify-content-sm-end">
+          <a href="companies.php" class="btn-six d-none d-sm-inline-block">Explore More</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <?php while ($company = mysqli_fetch_assoc($companies_result)): ?>
+        <div class="col-lg-3 col-sm-6">
+          <div class="card-style-ten text-center tran3s mt-25 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+            <img src="<?php echo $company['company_icon'] ?>" alt="" class="lazy-img m-auto">
+            <div class="text-lg fw-500 text-dark mt-15 mb-30"><?php echo $company['company_name'] ?></div>
+            <p class="mb-20"><?php echo $company['company_location'] ?>...</p>
+            <a href="company.php?company-id=<?php echo $company['company_id'] ?>" class="btn-one fw-500 tran3s">3 open job</a>
+          </div>
+        </div>
+      <?php endwhile; ?>
+    </div>
+
+    <div class="text-center mt-30 d-sm-none">
+      <a href="company-v1.html" class="btn-six">Explore More</a>
+    </div>
+  </div>
+</section>
 
 <!-- 
 		=============================================

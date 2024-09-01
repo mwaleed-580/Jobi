@@ -94,7 +94,7 @@ $categories_result = mysqli_query($conn, $categories_sql);
 		============================================== 
 		-->
         <header class="theme-main-menu menu-overlay menu-style-one sticky-menu">
-            <div class="inner-content position-relative">
+            <div class="inner-content position-relative container">
                 <div class="top-header">
                     <div class="d-flex align-items-center">
                         <div class="logo order-lg-0">
@@ -163,7 +163,7 @@ $categories_result = mysqli_query($conn, $categories_sql);
                                                                 class="icon d-flex align-items-center justify-content-center rounded-circle tran3s">
                                                                 <img
                                                                     src="assets/images/lazy.svg"
-                                                                    data-src="https://html.creativegigstf.com/jobi/jobi/<?php echo $category['category_icon'] ?>"
+                                                                    data-src="<?php echo $category['category_icon'] ?>"
                                                                     alt=""
                                                                     class="lazy-img" />
                                                             </div>
