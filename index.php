@@ -372,10 +372,10 @@ $locations_sql = "SELECT * FROM locations";
         <div class="item">
           <div class="card-style-three text-center">
             <div class="img-meta mb-40 lg-mb-20">
-              <img
-                src="<?php echo $location['location_image'] ?>"
-                alt=""
-                class="m-auto" />
+              <a href="#"><img
+                  src="<?php echo $location['location_image'] ?>"
+                  alt=""
+                  class="m-auto" /></a>
             </div>
             <a href="#" class="name text-md fw-500 text-dark"><?php echo $location['location_name'] ?></a>
             <div class="post">12k+ Jobs</div>
