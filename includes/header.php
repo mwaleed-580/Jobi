@@ -2,8 +2,8 @@
 
 <?php
 
-$sql = "SELECT * FROM job_categories LIMIT 6";
-$result = mysqli_query($conn, $sql);
+$categories_sql = "SELECT * FROM job_categories LIMIT 6";
+$categories_result = mysqli_query($conn, $categories_sql);
 
 ?>
 
@@ -154,7 +154,7 @@ $result = mysqli_query($conn, $sql);
                                             aria-expanded="false"><i class="bi bi-grid-fill"></i> Category</a>
                                         <ul class="dropdown-menu category-dropdown">
                                             <li class="row gx-0">
-                                                <?php while ($category = mysqli_fetch_assoc($result)): ?>
+                                                <?php while ($category = mysqli_fetch_assoc($categories_result)): ?>
                                                     <div class="col-lg-6">
                                                         <a
                                                             href="job-list-v1.html"

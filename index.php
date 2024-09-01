@@ -1,7 +1,5 @@
 <?php require "includes/header.php" ?>
 
-
-
 <!-- 
 		=============================================
 			Hero Banner
@@ -42,13 +40,11 @@
                     <div class="input-box border-left">
                       <div class="label">Category</div>
                       <select class="nice-select lg">
-                        <option value="1">Web Design</option>
-                        <option value="2">Design & Creative</option>
-                        <option value="3">It & Development</option>
-                        <option value="4">Web & Mobile Dev</option>
-                        <option value="5">Writing</option>
-                        <option value="6">Sales & Marketing</option>
-                        <option value="7">Music & Audio</option>
+                        <?php
+                        $categories_result = mysqli_query($conn, $categories_sql);
+                        while ($category = mysqli_fetch_assoc($categories_result)): ?>
+                          <option value="<?php echo $category['category_id'] ?>"><?php echo $category['category_name'] ?></option>
+                        <?php endwhile; ?>
                       </select>
                     </div>
                   </div>
@@ -136,106 +132,24 @@
     </div>
     <div
       class="card-wrapper row justify-content-center mt-75 lg-mt-40 md-mt-10">
-      <div class="card-style-one text-center mt-20 wow fadeInUp">
-        <a href="job-grid-v1.html" class="bg wrapper active">
-          <div
-            class="icon d-flex align-items-center justify-content-center">
-            <img
-              src="assets/images/lazy.svg"
-              data-src="https://html.creativegigstf.com/jobi/jobi/images/icon/icon_01.svg"
-              alt=""
-              class="lazy-img" />
-          </div>
-          <div class="title fw-500">UI/UX Design</div>
-          <div class="total-job">12k+ Jobs</div>
-        </a>
-      </div>
-      <!-- /.card-style-one -->
-      <div
-        class="card-style-one text-center mt-20 wow fadeInUp"
-        data-wow-delay="0.1s">
-        <a href="job-grid-v2.html" class="bg wrapper">
-          <div
-            class="icon d-flex align-items-center justify-content-center">
-            <img
-              src="assets/images/lazy.svg"
-              data-src="https://html.creativegigstf.com/jobi/jobi/images/icon/icon_02.svg"
-              alt=""
-              class="lazy-img" />
-          </div>
-          <div class="title fw-500">Development</div>
-          <div class="total-job">8k+ Jobs</div>
-        </a>
-      </div>
-      <!-- /.card-style-one -->
-      <div
-        class="card-style-one text-center mt-20 wow fadeInUp"
-        data-wow-delay="0.15s">
-        <a href="job-grid-v3.html" class="bg wrapper">
-          <div
-            class="icon d-flex align-items-center justify-content-center">
-            <img
-              src="assets/images/lazy.svg"
-              data-src="https://html.creativegigstf.com/jobi/jobi/images/icon/icon_03.svg"
-              alt=""
-              class="lazy-img" />
-          </div>
-          <div class="title fw-500">Marketing</div>
-          <div class="total-job">10k+ Jobs</div>
-        </a>
-      </div>
-      <!-- /.card-style-one -->
-      <div
-        class="card-style-one text-center mt-20 wow fadeInUp"
-        data-wow-delay="0.16s">
-        <a href="job-grid-v1.html" class="bg wrapper">
-          <div
-            class="icon d-flex align-items-center justify-content-center">
-            <img
-              src="assets/images/lazy.svg"
-              data-src="https://html.creativegigstf.com/jobi/jobi/images/icon/icon_04.svg"
-              alt=""
-              class="lazy-img" />
-          </div>
-          <div class="title fw-500">Telemarketing</div>
-          <div class="total-job">6k+ Jobs</div>
-        </a>
-      </div>
-      <!-- /.card-style-one -->
-      <div
-        class="card-style-one text-center mt-20 wow fadeInUp"
-        data-wow-delay="0.17s">
-        <a href="job-grid-v2.html" class="bg wrapper">
-          <div
-            class="icon d-flex align-items-center justify-content-center">
-            <img
-              src="assets/images/lazy.svg"
-              data-src="https://html.creativegigstf.com/jobi/jobi/images/icon/icon_05.svg"
-              alt=""
-              class="lazy-img" />
-          </div>
-          <div class="title fw-500">Editing</div>
-          <div class="total-job">7k+ Jobs</div>
-        </a>
-      </div>
-      <!-- /.card-style-one -->
-      <div
-        class="card-style-one text-center mt-20 wow fadeInUp"
-        data-wow-delay="0.18s">
-        <a href="job-grid-v3.html" class="bg wrapper">
-          <div
-            class="icon d-flex align-items-center justify-content-center">
-            <img
-              src="assets/images/lazy.svg"
-              data-src="https://html.creativegigstf.com/jobi/jobi/images/icon/icon_06.svg"
-              alt=""
-              class="lazy-img" />
-          </div>
-          <div class="title fw-500">Accounting</div>
-          <div class="total-job">17k+ Jobs</div>
-        </a>
-      </div>
-      <!-- /.card-style-one -->
+      <?php
+      $categories_result = mysqli_query($conn, $categories_sql);
+      while ($category = mysqli_fetch_assoc($categories_result)): ?>
+        <div class="card-style-one text-center mt-20 wow fadeInUp">
+          <a href="job-grid-v1.html" class="bg wrapper">
+            <div
+              class="icon d-flex align-items-center justify-content-center">
+              <img
+                src="assets/images/lazy.svg"
+                data-src="https://html.creativegigstf.com/jobi/jobi/<?php echo $category['category_icon'] ?>"
+                alt=""
+                class="lazy-img" />
+            </div>
+            <div class="title fw-500 text-dark"><?php echo $category['category_name'] ?></div>
+            <div class="total-job">12k+ Jobs</div>
+          </a>
+        </div>
+      <?php endwhile; ?>
     </div>
     <!-- /.card-wrapper -->
     <div class="text-center mt-40 d-lg-none">
@@ -660,48 +574,6 @@
         <i class="bi bi-arrow-right"></i>
       </li>
     </ul>
-
-    <div
-      class="partner-logos pt-150 xl-pt-120 md-pt-80 sm-pt-40 pb-80 md-pb-40">
-      <div class="partner-slider">
-        <div class="item">
-          <div class="logo d-flex align-items-center">
-            <img src="assets/images/logo/media_03.png" alt="" />
-          </div>
-        </div>
-        <div class="item">
-          <div class="logo d-flex align-items-center">
-            <img src="assets/images/logo/media_04.png" alt="" />
-          </div>
-        </div>
-        <div class="item">
-          <div class="logo d-flex align-items-center">
-            <img src="assets/images/logo/media_05.png" alt="" />
-          </div>
-        </div>
-        <div class="item">
-          <div class="logo d-flex align-items-center">
-            <img src="assets/images/logo/media_06.png" alt="" />
-          </div>
-        </div>
-        <div class="item">
-          <div class="logo d-flex align-items-center">
-            <img src="assets/images/logo/media_07.png" alt="" />
-          </div>
-        </div>
-        <div class="item">
-          <div class="logo d-flex align-items-center">
-            <img src="assets/images/logo/media_08.png" alt="" />
-          </div>
-        </div>
-        <div class="item">
-          <div class="logo d-flex align-items-center">
-            <img src="assets/images/logo/media_05.png" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.partner-logos -->
   </div>
 </section>
 <!-- /.feedback-section-one -->
@@ -794,6 +666,48 @@
         <!-- /.big-circle -->
       </div>
     </div>
+
+    <div
+      class="partner-logos pt-150 xl-pt-120 md-pt-80 sm-pt-40 pb-80 md-pb-40">
+      <div class="partner-slider">
+        <div class="item">
+          <div class="logo d-flex align-items-center">
+            <img src="assets/images/logo/media_03.png" alt="" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="logo d-flex align-items-center">
+            <img src="assets/images/logo/media_04.png" alt="" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="logo d-flex align-items-center">
+            <img src="assets/images/logo/media_05.png" alt="" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="logo d-flex align-items-center">
+            <img src="assets/images/logo/media_06.png" alt="" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="logo d-flex align-items-center">
+            <img src="assets/images/logo/media_07.png" alt="" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="logo d-flex align-items-center">
+            <img src="assets/images/logo/media_08.png" alt="" />
+          </div>
+        </div>
+        <div class="item">
+          <div class="logo d-flex align-items-center">
+            <img src="assets/images/logo/media_05.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.partner-logos -->
   </div>
 </section>
 <!-- /.text-feature-two -->
