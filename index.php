@@ -3,10 +3,8 @@
 <?php
 
 $companies_sql = "SELECT * FROM companies LIMIT 4";
-$companies_result = mysqli_query($conn, $companies_sql);
 
 $locations_sql = "SELECT * FROM locations";
-$locations_result = mysqli_query($conn, $locations_sql);
 
 ?>
 
@@ -38,8 +36,7 @@ $locations_result = mysqli_query($conn, $locations_sql);
                     <div class="input-box">
                       <div class="label">What are you looking for?</div>
                       <select class="nice-select lg">
-                        <?php
-                        $categories_result = mysqli_query($conn, $categories_sql);
+                        <?php $categories_result = mysqli_query($conn, $categories_sql);
                         while ($category = mysqli_fetch_assoc($categories_result)): ?>
                           <option value="<?php echo $category['category_id'] ?>"><?php echo $category['category_name'] ?></option>
                         <?php endwhile; ?>
@@ -50,7 +47,8 @@ $locations_result = mysqli_query($conn, $locations_sql);
                     <div class="input-box border-left">
                       <div class="label">Location</div>
                       <select class="nice-select lg">
-                        <?php while ($location = mysqli_fetch_assoc($locations_result)): ?>
+                        <?php $locations_result = mysqli_query($conn, $locations_sql);
+                        while ($location = mysqli_fetch_assoc($locations_result)): ?>
                           <option value="<?php echo $location['location_id'] ?>"><?php echo $location['location_name'] ?></option>
                         <?php endwhile; ?>
                       </select>
@@ -369,7 +367,8 @@ $locations_result = mysqli_query($conn, $locations_sql);
     </div>
 
     <div class="expert-slider-one">
-      <?php while ($location = mysqli_fetch_assoc($locations_result)): ?>
+      <?php $locations_result = mysqli_query($conn, $locations_sql);
+      while ($location = mysqli_fetch_assoc($locations_result)): ?>
         <div class="item">
           <div class="card-style-three text-center">
             <div class="img-meta mb-40 lg-mb-20">
@@ -553,7 +552,8 @@ $locations_result = mysqli_query($conn, $locations_sql);
       </div>
     </div>
     <div class="row">
-      <?php while ($company = mysqli_fetch_assoc($companies_result)): ?>
+      <?php $companies_result = mysqli_query($conn, $companies_sql);
+      while ($company = mysqli_fetch_assoc($companies_result)): ?>
         <div class="col-lg-3 col-sm-6">
           <div class="card-style-ten text-center tran3s mt-25 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
             <img src="<?php echo $company['company_icon'] ?>" alt="" class="lazy-img m-auto">
