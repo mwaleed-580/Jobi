@@ -50,11 +50,9 @@ $locations_result = mysqli_query($conn, $locations_sql);
                     <div class="input-box border-left">
                       <div class="label">Location</div>
                       <select class="nice-select lg">
-                        <option value="1">UI Designer</option>
-                        <option value="2">Content creator</option>
-                        <option value="3">Web Developer</option>
-                        <option value="4">SEO Guru</option>
-                        <option value="5">Digital marketer</option>
+                        <?php while ($location = mysqli_fetch_assoc($locations_result)): ?>
+                          <option value="<?php echo $location['location_id'] ?>"><?php echo $location['location_name'] ?></option>
+                        <?php endwhile; ?>
                       </select>
                     </div>
                   </div>
